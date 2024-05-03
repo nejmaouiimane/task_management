@@ -58,22 +58,19 @@ class TasksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request  $request, Task $task)
+    public function update(Request $request, Task $task)
     {
-        request()->validate([
-            "task" => "required",
-            "description"  => "required",
-            "task_timing"  => "required",
+        $validatedData = $request->validate([
+            'task' => 'required',
+            'description' => 'required',
+            'task_timing' => 'required',
         ]);
-        $request->update([
-            "task" => $request->task,
-            "description"  => $request->description,
-            "task_timing"  => $request->task_timing,
-        ]);
+    
+        $task->update($validatedData);
+    
         return back();
     }
-
-    /**
+        /**
      * Remove the specified resource from storage.
      */
     public function destroy(Task $task)
